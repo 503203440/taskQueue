@@ -1,8 +1,7 @@
 package com.yx.tq.task;
 
 import com.yx.tq.task.component.DataContainer;
-import com.yx.tq.task.component.TaskQueueComponent;
-import com.yx.tq.task.entity.Item;
+import com.yx.tq.task.entity.Mail;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,13 +25,13 @@ public class AddTaskQueueController {
 
         for (int i = 0; i < 9999; i++) {
 
-            Item item=new Item();
-            item.setName("NO."+(i+1));
-            item.setStartTime(new Date());
+            Mail mail =new Mail();
+            mail.setName("NO."+(i+1));
+            mail.setSendTime(new Date());
 
-            //如果不包含则加入到items
-            if(!DataContainer.items.contains(item)){
-                DataContainer.items.add(item);
+            //如果不包含则加入到mails
+            if(!DataContainer.mail.contains(mail)){
+                DataContainer.mail.add(mail);
             }
 
         }

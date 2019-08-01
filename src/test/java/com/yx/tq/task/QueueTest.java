@@ -1,6 +1,6 @@
 package com.yx.tq.task;
 
-import com.yx.tq.task.entity.Item;
+import com.yx.tq.task.entity.Mail;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.SimpleDateFormat;
@@ -16,7 +16,7 @@ import java.util.concurrent.*;
 public class QueueTest {
 
     //使用并发连接双端队列
-    static volatile Queue<Item> items = new ConcurrentLinkedDeque<>();
+    static volatile Queue<Mail> mail = new ConcurrentLinkedDeque<>();
 
 
     //启动线程
@@ -44,10 +44,10 @@ public class QueueTest {
 //                    } catch (InterruptedException e) {
 //                        log.error("线程休眠失败");
 //                    }
-                    Item item = new Item();
-                    item.setName("NO." + (i + 1));
-                    item.setStartTime(new Date());
-                    items.add(item);//增加
+                    Mail mail = new Mail();
+                    mail.setName("NO." + (i + 1));
+                    mail.setSendTime(new Date());
+                    QueueTest.mail.add(mail);//增加
                 }
 
             }
@@ -68,10 +68,10 @@ public class QueueTest {
                     }
 
 
-//                  items.peek();//获取但不移除队列的头
-                    Item item = items.poll();//获取并移除队列的头
-                    if (item != null) {
-                        System.out.println(Thread.currentThread().getName()+"本次消费了[" + item.getName() + "]\t生产日期时间：" + new SimpleDateFormat("HH:mm:ss").format(item.getStartTime()));
+//                  mail.peek();//获取但不移除队列的头
+                    Mail mail = QueueTest.mail.poll();//获取并移除队列的头
+                    if (mail != null) {
+                        System.out.println(Thread.currentThread().getName()+"本次消费了[" + mail.getName() + "]\t生产日期时间：" + new SimpleDateFormat("HH:mm:ss").format(mail.getSendTime()));
                     }
                 }
 
@@ -92,10 +92,10 @@ public class QueueTest {
                     }
 
 
-//                  items.peek();//获取但不移除队列的头
-                    Item item = items.poll();//获取并移除队列的头
-                    if (item != null) {
-                        System.out.println(Thread.currentThread().getName()+"本次消费了[" + item.getName() + "]\t生产日期时间：" + new SimpleDateFormat("HH:mm:ss").format(item.getStartTime()));
+//                  mail.peek();//获取但不移除队列的头
+                    Mail mail = QueueTest.mail.poll();//获取并移除队列的头
+                    if (mail != null) {
+                        System.out.println(Thread.currentThread().getName()+"本次消费了[" + mail.getName() + "]\t生产日期时间：" + new SimpleDateFormat("HH:mm:ss").format(mail.getSendTime()));
                     }
                 }
 
@@ -117,7 +117,7 @@ public class QueueTest {
             //如果生产者已经执行完了
             if (state == Thread.State.TERMINATED) {
 
-                System.out.println("是否需要再生产一波Item？");
+                System.out.println("是否需要再生产一波mail？");
                 Scanner scanner = new Scanner(System.in);
                 String next = scanner.next();
 
@@ -136,10 +136,10 @@ public class QueueTest {
 //                    } catch (InterruptedException e) {
 //                        log.error("线程休眠失败");
 //                    }
-                                Item item = new Item();
-                                item.setName("NO." + (i + 1));
-                                item.setStartTime(new Date());
-                                items.add(item);//增加
+                                Mail mail = new Mail();
+                                mail.setName("NO." + (i + 1));
+                                mail.setSendTime(new Date());
+                                QueueTest.mail.add(mail);//增加
                             }
 
                         }
@@ -169,10 +169,10 @@ public class QueueTest {
 //                    } catch (InterruptedException e) {
 //                        log.error("线程休眠失败");
 //                    }
-                    Item item = new Item();
-                    item.setName("NO." + (i + 1));
-                    item.setStartTime(new Date());
-                    items.add(item);//增加
+                    Mail mail = new Mail();
+                    mail.setName("NO." + (i + 1));
+                    mail.setSendTime(new Date());
+                    QueueTest.mail.add(mail);//增加
                 }
             }
         });
@@ -198,10 +198,10 @@ public class QueueTest {
                     }
 
 
-//                  items.peek();//获取但不移除队列的头
-                    Item item = items.poll();//获取并移除队列的头
-                    if (item != null) {
-                        System.out.println(Thread.currentThread().getName() + "本次消费了[" + item.getName() + "]\t生产日期时间：" + new SimpleDateFormat("HH:mm:ss").format(item.getStartTime()));
+//                  mail.peek();//获取但不移除队列的头
+                    Mail mail = QueueTest.mail.poll();//获取并移除队列的头
+                    if (mail != null) {
+                        System.out.println(Thread.currentThread().getName() + "本次消费了[" + mail.getName() + "]\t生产日期时间：" + new SimpleDateFormat("HH:mm:ss").format(mail.getSendTime()));
                     }
                 }
             }
@@ -220,10 +220,10 @@ public class QueueTest {
                     }
 
 
-//                  items.peek();//获取但不移除队列的头
-                    Item item = items.poll();//获取并移除队列的头
-                    if (item != null) {
-                        System.out.println(Thread.currentThread().getName() + "本次消费了[" + item.getName() + "]\t生产日期时间：" + new SimpleDateFormat("HH:mm:ss").format(item.getStartTime()));
+//                  mail.peek();//获取但不移除队列的头
+                    Mail mail = QueueTest.mail.poll();//获取并移除队列的头
+                    if (mail != null) {
+                        System.out.println(Thread.currentThread().getName() + "本次消费了[" + mail.getName() + "]\t生产日期时间：" + new SimpleDateFormat("HH:mm:ss").format(mail.getSendTime()));
                     }
                 }
             }
@@ -245,7 +245,7 @@ public class QueueTest {
             //如果生产者已经执行完了
             if (state == Thread.State.TERMINATED) {
 
-                System.out.println("是否需要再生产一波Item？");
+                System.out.println("是否需要再生产一波mail？");
                 Scanner scanner = new Scanner(System.in);
                 String next = scanner.next();
 
@@ -264,10 +264,10 @@ public class QueueTest {
 //                    } catch (InterruptedException e) {
 //                        log.error("线程休眠失败");
 //                    }
-                                Item item = new Item();
-                                item.setName("NO." + (i + 1));
-                                item.setStartTime(new Date());
-                                items.add(item);//增加
+                                Mail mail = new Mail();
+                                mail.setName("NO." + (i + 1));
+                                mail.setSendTime(new Date());
+                                QueueTest.mail.add(mail);//增加
                             }
 
                         }

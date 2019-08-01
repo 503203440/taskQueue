@@ -1,6 +1,6 @@
 package com.yx.tq.task.component;
 
-import com.yx.tq.task.entity.Item;
+import com.yx.tq.task.entity.Mail;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -13,8 +13,8 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class DataContainer {
 
-    //Item任务队列
-    public static Queue<Item> items=new ConcurrentLinkedDeque<Item>();
+    //Mail任务队列
+    public static Queue<Mail> mail =new ConcurrentLinkedDeque<>();
 
     //其他任务队列...
 

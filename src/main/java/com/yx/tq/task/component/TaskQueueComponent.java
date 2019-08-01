@@ -1,13 +1,10 @@
 package com.yx.tq.task.component;
 
-import com.yx.tq.task.entity.Item;
 import com.yx.tq.task.taskObject.SendMail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -47,7 +44,7 @@ public class TaskQueueComponent implements CommandLineRunner {
 
         //构造线程任务，向线程池中加入处理器最大的线程数量
         for (int i = 0; i < threadNumber; i++) {
-            SendMail sendMail=new SendMail(DataContainer.items);//将数据容器的items交给sendMail任务类处理
+            SendMail sendMail=new SendMail(DataContainer.mail);//将数据容器的mails交给sendMail任务类处理
             executorService.execute(sendMail);
         }
 

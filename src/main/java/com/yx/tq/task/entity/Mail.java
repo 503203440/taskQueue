@@ -1,17 +1,15 @@
 package com.yx.tq.task.entity;
 
 
-import lombok.Data;
-
 import java.util.Date;
 import java.util.Objects;
 
 //@Data
-public class Item {
+public class Mail {
 
 
     private String name;
-    private Date startTime;
+    private Date sendTime;
 
     public String getName() {
         return name;
@@ -21,12 +19,12 @@ public class Item {
         this.name = name;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public Date getSendTime() {
+        return sendTime;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public void setSendTime(Date sendTime) {
+        this.sendTime = sendTime;
     }
 
 
@@ -37,9 +35,9 @@ public class Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return Objects.equals(name, item.name) &&
-                Objects.equals(startTime, item.startTime);
+        Mail mail = (Mail) o;
+        return Objects.equals(name, mail.name) &&
+                Objects.equals(sendTime, mail.sendTime);
     }
 
     /**
@@ -48,7 +46,7 @@ public class Item {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, startTime);
+        return Objects.hash(name, sendTime);
     }
 
 
