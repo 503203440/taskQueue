@@ -20,29 +20,53 @@ import java.util.concurrent.Executors;
 @Component
 public class TaskQueueComponent implements CommandLineRunner {
 
-    //定义任务队列
-    public static Queue<Item> tasks=new ConcurrentLinkedDeque<>();
-
-
     @Override
     public void run(String... args) throws Exception {
 
+        sendMail();
+
+
+    }
+
+
+    //发送消息的方法
+    public void sendMail(){
         //当系统启动以后，开启消费者线程，开始处理任务队列
 
         //定义线程池
         int cpuTotal = Runtime.getRuntime().availableProcessors();
-        int threadNumber=cpuTotal*2;
         log.info("CPU核心数:{}",cpuTotal);
 
         //一核心两线程
+//        int threadNumber=cpuTotal*2;
+//        ExecutorService executorService = Executors.newFixedThreadPool(threadNumber);
+
+        //这里就不创建这么多线程了，避免过度使用cpu资源
+        int threadNumber=cpuTotal;
         ExecutorService executorService = Executors.newFixedThreadPool(threadNumber);
 
         //构造线程任务，向线程池中加入处理器最大的线程数量
         for (int i = 0; i < threadNumber; i++) {
-            SendMail sendMail=new SendMail(tasks);
+            SendMail sendMail=new SendMail(DataContainer.items);//将数据容器的items交给sendMail任务类处理
             executorService.execute(sendMail);
         }
 
-        log.info("线程池启动完毕");
+        log.info("发送消息线程池启动完毕");
+
     }
+
+    //修改状态的方法
+    public void changStatus(){
+
+
+
+
+    }
+
+
+
+
+
+
+
 }

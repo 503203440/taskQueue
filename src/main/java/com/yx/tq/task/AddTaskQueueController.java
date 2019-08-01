@@ -1,5 +1,6 @@
 package com.yx.tq.task;
 
+import com.yx.tq.task.component.DataContainer;
 import com.yx.tq.task.component.TaskQueueComponent;
 import com.yx.tq.task.entity.Item;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +30,12 @@ public class AddTaskQueueController {
             item.setName("NO."+(i+1));
             item.setStartTime(new Date());
 
-            TaskQueueComponent.tasks.add(item);
+            //如果不包含则加入到items
+            if(!DataContainer.items.contains(item)){
+                DataContainer.items.add(item);
+            }
+
         }
-
-
         return "000";
     }
 
