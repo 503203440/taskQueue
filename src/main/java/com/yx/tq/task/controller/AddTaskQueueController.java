@@ -1,4 +1,4 @@
-package com.yx.tq.task;
+package com.yx.tq.task.controller;
 
 import com.yx.tq.task.component.DataContainer;
 import com.yx.tq.task.entity.Mail;
