@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 /**
  * @author YX
  * @date 2019-08-01 15:01
- * 启动项目是会执行此类
+ * 启动项目时执行
  */
 @Slf4j
 @Component
@@ -39,7 +39,7 @@ public class TaskQueueComponent implements CommandLineRunner {
 //        ExecutorService executorService = Executors.newFixedThreadPool(threadNumber);
 
         //这里就不创建这么多线程了，避免过度使用cpu资源
-        int threadNumber=cpuTotal;
+        int threadNumber=cpuTotal*2;
         ExecutorService executorService = Executors.newFixedThreadPool(threadNumber);
 
         //构造线程任务，向线程池中加入处理器最大的线程数量
